@@ -1,31 +1,151 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Page Title</title>
+  <meta charset="UTF-8">
+  <title>Responsive Navigation Menu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --peach-light: #ffe5d0;
+      --peach-accent: #ffb385;
+      --nav-text: #3d2c29;
+      --nav-hover: #fff;
+      --nav-active: #ff7f50;
+      --shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--peach-light);
+      min-height: 100vh;
+    }
+    nav {
+      background: var(--peach-light);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 1.5rem;
+    }
+    .nav-logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--nav-active);
+      letter-spacing: 2px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.3rem;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--nav-text);
+      font-weight: 500;
+      padding: 0.5rem 1.1rem;
+      border-radius: 25px;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      background: transparent;
+      outline: none;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      position: relative;
+    }
+    .nav-links a:hover, .nav-links a:focus {
+      background: var(--peach-accent);
+      color: var(--nav-hover);
+      box-shadow: 0 2px 12px rgba(255,179,133,0.18);
+    }
+    .nav-links a.active {
+      background: var(--nav-active);
+      color: #fff;
+    }
+    /* Hamburger Menu */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+    .nav-toggle span {
+      width: 28px;
+      height: 3px;
+      background: var(--nav-active);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    /* Responsive */
+    @media (max-width: 800px) {
+      .nav-links {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: var(--peach-light);
+        flex-direction: column;
+        width: 200px;
+        box-shadow: var(--shadow);
+        gap: 0;
+        display: none;
+        border-radius: 0 0 12px 12px;
+        overflow: hidden;
+      }
+      .nav-links.open {
+        display: flex;
+        animation: slideDown 0.25s;
+      }
+      .nav-links a {
+        padding: 1rem 1.5rem;
+        border-radius: 0;
+        border-bottom: 1px solid #f9d5bb;
+      }
+      .nav-toggle {
+        display: flex;
+      }
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
 </head>
-<body><center>
-
-<Font color="darckred">
-<h1>Welcome to my Web Site</h1>
-</Font>
-
-<Font color="grey">
-
-<h2> My name is Tatiana Gomez</h2>
-<img src="images/tati.jpg"300"width="300">
-
-<h3>My major is Digital Media</h3>
-</Font>
-
-<p>Originally from Colombia, Tatiana relocated to Bogotá at a young age, where her innate curiosity about the world began to take shape. This early passion for exploration fueled extensive travels throughout adulthood, ultimately inspiring a bold move to New York City in pursuit of her dream to become a fashion designer.
-As Tatiana’s journey unfolded, her interests evolved, leading her to study communications. This academic path opened the door to digital marketing—a field where she discovered a deep passion for crafting compelling narratives and building authentic connections with diverse audiences. Alongside this professional growth, Tatiana also developed a keen interest in coding and technology, continually expanding her versatile skill set in today’s digital landscape.
-Having navigated the challenges and opportunities of being an immigrant, Tatiana understands the resilience required to adapt, reinvent oneself, and pursue new ambitions. Her journey reflects a commitment to growth, adaptability, and the courage to embrace change. Tatiana believes that success is not just about following a fixed path, but about evolving with purpose and an open mind.
-.</p>
-<a href="https://www.instagram.com/tatianagthorrens"> Go to my instagram blog </a>
-
-Copyright &copy:all rights Reserved 2025
+<body>
+  <nav>
+    <div class="nav-container">
+      <div class="nav-logo">Tatiana</div>
+      <div class="nav-toggle" id="navToggle" aria-label="Toggle navigation" tabindex="0">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="#" class="active">Home</a>
+        <a href="#">About Me</a>
+        <a href="#">Service</a>
+        <a href="#">Products</a>
+        <a href="#">Diet Blog</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </nav>
+  <!-- Content placeholder -->
+  <main style="max-width: 900px; margin: 2rem auto; background: #fff8f5; border-radius: 14px; box-shadow: var(--shadow); padding: 2rem;">
+    <h1>Welcome!</h1>
+    <p>This is a sample page with a beautiful, responsive navigation menu.</p>
+  </main>
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.onclick = () => navLinks.classList.toggle('open');
+    navToggle.onkeypress = (e) => { if (e.key === 'Enter') navLinks.classList.toggle('open'); };
+    // Optional: Close menu on link click (mobile)
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+  </script>
 </body>
 </html>
-
-
-
